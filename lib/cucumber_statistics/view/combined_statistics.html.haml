@@ -8,7 +8,7 @@
     %meta{:content => "AlienFast", :name => "author"}/
     %title Cucumber Scenario Statistics
     / Bootstrap core CSS
-    %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", :rel => "stylesheet"}/
+    %link{:href => "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", :rel => "stylesheet"}/
     / Custom styles for this layout
     :css
       body {
@@ -25,7 +25,7 @@
           text-overflow: ellipsis;
           max-width: 300px;
       }
-    %link{:href => "//raw.githack.com/drvic10k/bootstrap-sortable/master/Contents/bootstrap-sortable.css", :rel => "stylesheet"}/
+    %link{:href => "https://raw.githack.com/drvic10k/bootstrap-sortable/master/Contents/bootstrap-sortable.css", :rel => "stylesheet"}/
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     /[if lt IE 9]
       <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -122,7 +122,8 @@
                 %tbody
                   - scenario_statistics.all.each do |file_name, scenario_result|
                     %tr
-                      = std_file_td file_name, scenario_result[:scenario_name]
+                      = std_file_td scenario_result[:scenario_name], scenario_result[:scenario_name]
+                      = std_file_td file_name, scenario_result[:scenario_file]
                       = std_time_td scenario_result[:duration]
             / /container
 
@@ -154,10 +155,10 @@
     /  Bootstrap core JavaScript
     /  \==================================================
     / Placed at the end of the document so the pages load faster
-    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"}
-    %script{:src => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"}
-    %script{:src => "//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/moment.min.js"}
-    %script{:src => "//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/bootstrap-sortable.js"}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"}
+    %script{:src => "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"}
+    %script{:src => "https://raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/moment.min.js"}
+    %script{:src => "https://raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/bootstrap-sortable.js"}
     :javascript
       // Initialise on DOM ready
       $(function() {

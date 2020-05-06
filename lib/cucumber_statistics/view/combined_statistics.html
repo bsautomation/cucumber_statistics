@@ -8,7 +8,7 @@
     <meta content='AlienFast' name='author'>
     <title>Cucumber Scenario Statistics</title>
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' rel='stylesheet'>
     <!-- Custom styles for this layout -->
     <style>
       body {
@@ -26,7 +26,7 @@
           max-width: 300px;
       }
     </style>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.1/Sortable.js' rel='stylesheet'>
+    <link href='https://raw.githack.com/drvic10k/bootstrap-sortable/master/Contents/bootstrap-sortable.css' rel='stylesheet'>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -210,24 +210,29 @@
               <table class='table table-bordered table-striped sortable'>
                 <thead>
                   <tr>
+                    <th>Scenario Name</th>
                     <th>Scenario File</th>
                     <th data-defaultsort='desc'>Time</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
+                    <td title="Scenario 1">Scenario 1</td>
                     <td title="Regular numbers">features/scenarios/calculator2.feature:10</td>
                     <td data-value="1.316579" title="1.316579">1.316s</td>
                   </tr>
                   <tr>
+                    <td title="Scenario 2">Scenario 2</td>
                     <td title="Regular numbers again">features/scenarios/calculator2.feature:16</td>
                     <td data-value="1.314667" title="1.314667">1.314s</td>
                   </tr>
                   <tr>
+                    <td title="Scenario 3">Scenario 3</td>
                     <td title="| 3.5 | 5.2 | 8.7 |">features/scenarios/calculator2.feature:31</td>
                     <td data-value="3.136923" title="3.136923">3.136s</td>
                   </tr>
                   <tr>
+                    <td title="Scenario 3">Scenario 3</td>
                     <td title="Run a google search">features/scenarios/demo.feature:4</td>
                     <td data-value="2.730182" title="2.730182">2.730s</td>
                   </tr>
@@ -281,17 +286,14 @@
     <!-- Bootstrap core JavaScript -->
     <!-- \================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
-    <script href='//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/moment.min.js'></script>
-    <script href='//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/bootstrap-sortable.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+    <script src='https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+    <script src='https://raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/moment.min.js'></script>
+    <script src='https://raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/bootstrap-sortable.js'></script>
     <script>
       // Initialise on DOM ready
       $(function() {
-          // $.bootstrapSortable(true, 'reversed');
-          $("#sortable").sortable();
+          $.bootstrapSortable(true, 'reversed');
       });
       $('a.content_tab').click(function (e) {
         e.preventDefault();

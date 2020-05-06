@@ -11,6 +11,7 @@ module CucumberStatistics
       scenario_result ||= Hash.new
       scenario_result[:duration] = duration
       scenario_result[:scenario_name] = scenario_name
+      scenario_result[:scenario_file] = file_colon_line
 
       @all[short_file_colon_line] ||= scenario_result
     end

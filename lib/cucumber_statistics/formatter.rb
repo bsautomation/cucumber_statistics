@@ -24,9 +24,11 @@ module CucumberStatistics
     end
 
     def after_step_result(keyword, step_match, multiline_arg, status, exception, source_indent, background, file_colon_line)
-      step_definition = step_match.step_definition
-      unless step_definition.nil? # nil if it's from a scenario outline
+      step_definition = step_match.step_definition.nil? ? step_match.name : step_match.step_definition
+      if !step_definition.instance_of?(String) # nil if it's from a scenario outline
         @step_statistics.record step_definition.expression, @step_duration, file_colon_line
+      else
+        @step_statistics.record step_definition, @step_duration, file_colon_line
       end
     end
 
