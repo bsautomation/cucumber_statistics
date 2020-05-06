@@ -43,7 +43,9 @@ module CucumberStatistics
     end
 
     def after_feature_element(feature_element)
-      @scenario_duration = Time.now - @scenario_start_time
+      s_duration = 0
+      @step_mother.steps.each { |s| s_duration = s_duration.to_f + (s.duration.nanoseconds.to_f/1000000000).round(2) }
+      @scenario_duration = s_duration
       @scenario_statistics.record @scenario_name, @scenario_duration, @scenario_file_colon_line
     end
 
