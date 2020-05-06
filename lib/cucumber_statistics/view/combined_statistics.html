@@ -8,7 +8,7 @@
     <meta content='AlienFast' name='author'>
     <title>Cucumber Scenario Statistics</title>
     <!-- Bootstrap core CSS -->
-    <link href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom styles for this layout -->
     <style>
       body {
@@ -26,7 +26,7 @@
           max-width: 300px;
       }
     </style>
-    <link href='//raw.githack.com/drvic10k/bootstrap-sortable/master/Contents/bootstrap-sortable.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.1/Sortable.js' rel='stylesheet'>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -281,14 +281,17 @@
     <!-- Bootstrap core JavaScript -->
     <!-- \================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
-    <script src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
-    <script src='//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/moment.min.js'></script>
-    <script src='//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/bootstrap-sortable.js'></script>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+    <script href='//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/moment.min.js'></script>
+    <script href='//raw.githack.com/drvic10k/bootstrap-sortable/master/Scripts/bootstrap-sortable.js'></script>
     <script>
       // Initialise on DOM ready
       $(function() {
-          $.bootstrapSortable(true, 'reversed');
+          // $.bootstrapSortable(true, 'reversed');
+          $("#sortable").sortable();
       });
       $('a.content_tab').click(function (e) {
         e.preventDefault();
