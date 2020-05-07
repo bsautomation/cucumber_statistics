@@ -93,7 +93,6 @@ module CucumberStatistics
       @feature_file = feature.location.to_s
       @feature_duration = Time.now - @feature_start_time
       @feature_statistics.record @feature_name, @feature_duration, @feature_file
-      AllureRubyAdaptorApi::Builder.stop_suite(@tracker.feature_name)
     end
 
     def before_features(features)
@@ -112,13 +111,11 @@ module CucumberStatistics
       @step_statistics.calculate
 
       Renderer.render_combined_statistics @step_statistics, @scenario_statistics, @feature_statistics, @overall_statistics
-      AllureRubyAdaptorApi::Builder.build!
     end
 
     def before_feature(feature)
       feature_identifier = ENV['FEATURE_IDENTIFIER'] && "#{ENV['FEATURE_IDENTIFIER']} - "
       @tracker.feature_name = "#{feature_identifier}#{feature.name.gsub(/\n/, " ")}"
-      AllureRubyAdaptorApi::Builder.start_suite(@tracker.feature_name)
     end
 
     def before_examples(*args)
@@ -172,10 +169,10 @@ module CucumberStatistics
     end
     
     def before_test_step(test_step)
-      if !TEST_HOOK_NAMES_TO_IGNORE.include?(test_step.name) 
+      if !TEST_HOOK_NAMES_TO_IGNORE.include?(test_step.to_s) 
         if @tracker.scenario_name
           step_location =  test_step.location.lines.first.to_s
-          step_name = test_step.name
+          step_name = test_step.to_s
           @tracker.step_id = "#{@tracker.feature_name}-#{@tracker.scenario_name}-#{step_name}-#{step_location}"
           @tracker.step_name = step_name
           start_step
@@ -186,11 +183,11 @@ module CucumberStatistics
     end
     
     def after_test_step(test_step, result)
-      if test_step.name == 'Before hook'
+      if test_step.to_s == 'Before hook'
         if (!@before_hook_exception) && result.methods.include?(:exception)
           @before_hook_exception = result.exception
         end
-      elsif test_step.name != 'After hook'
+      elsif test_step.to_s != 'After hook'
         if @tracker.scenario_name
           status = step_status(result)
           stop_step(status)
@@ -198,15 +195,6 @@ module CucumberStatistics
           @deferred_after_test_steps << {:step => test_step, :result => result, :timestamp => Time.now}
         end
       end
-    end
-
-    # Stop the suite
-    def after_feature(feature)
-      AllureRubyAdaptorApi::Builder.stop_suite(@tracker.feature_name)
-    end
-
-    def after_features(features)
-      AllureRubyAdaptorApi::Builder.build!
     end
     
     def before_multiline_arg(multiline_arg)
@@ -277,7 +265,7 @@ module CucumberStatistics
       if @tracker.scenario_name
         @scenario_tags[:feature] = @tracker.feature_name
         @scenario_tags[:story]   = @tracker.scenario_name
-        AllureRubyAdaptorApi::Builder.start_test(@tracker.feature_name, @tracker.scenario_name, @scenario_tags)
+        # AllureRubyAdaptorApi::Builder.start_test(@tracker.feature_name, @tracker.scenario_name, @scenario_tags)
         post_deferred_steps
       end
     end
@@ -303,7 +291,7 @@ module CucumberStatistics
         result[:started_at] = @deferred_before_test_steps[0][:timestamp]
       end
       if @tracker.scenario_name
-        AllureRubyAdaptorApi::Builder.stop_test(@tracker.feature_name, @tracker.scenario_name, result)
+        # AllureRubyAdaptorApi::Builder.stop_test(@tracker.feature_name, @tracker.scenario_name, result)
         @tracker.scenario_name = nil
         @deferred_before_test_steps = []
         @deferred_after_test_steps = []
@@ -313,11 +301,11 @@ module CucumberStatistics
     end
 
     def start_step(step_name = @tracker.step_name, step_id = @tracker.step_id)
-      AllureRubyAdaptorApi::Builder.start_step(@tracker.feature_name, @tracker.scenario_name, step_name, step_id)
+      # AllureRubyAdaptorApi::Builder.start_step(@tracker.feature_name, @tracker.scenario_name, step_name, step_id)
     end
 
     def stop_step(status, step_name = @tracker.step_name, step_id = @tracker.step_id)
-      AllureRubyAdaptorApi::Builder.stop_step(@tracker.feature_name, @tracker.scenario_name, step_name, step_id, status)
+      # AllureRubyAdaptorApi::Builder.stop_step(@tracker.feature_name, @tracker.scenario_name, step_name, step_id, status)
     end
   end
 end
