@@ -52,17 +52,62 @@
         .tabbable
           %ul.nav.nav-tabs
             %li.active
-              %a.content_tab{:href => "#steps_tab",:toggle=>"tab"}
-                Steps
+              %a.content_tab{:href => "#features_tab", :toggle=>"tab"}
+                Features
             %li
               %a.content_tab{:href => "#scenarios_tab", :toggle=>"tab"}
                 Scenarios
             %li
-              %a.content_tab{:href => "#features_tab", :toggle=>"tab"}
-                Features
+              %a.content_tab{:href => "#steps_tab",:toggle=>"tab"}
+                Steps
 
         .container
           .tab-content
+            #features_tab.tab-pane
+              / Main component for a primary marketing message or call to action
+              .jumbotron
+                %h1 Cucumber feature statistics
+                %p ... find those slow features.
+
+              .alert.alert-info
+                #{alert_info_text(overall_statistics)}
+
+              %table.table.table-bordered.table-striped.sortable
+                %thead
+                  %tr
+                    %th Feature File
+                    %th{"data-defaultsort" => "desc"} Time
+                %tbody
+                  - feature_statistics.all.each do |file_name, feature_result|
+
+                    %tr
+                      = std_file_td file_name, feature_result[:feature_name]
+                      = std_time_td feature_result[:duration]
+    / /container
+
+            #scenarios_tab.tab-pane
+              / Main component for a primary marketing message or call to action
+              .jumbotron
+                %h1 Cucumber scenario statistics
+                %p ... find those slow scenarios.
+
+              .alert.alert-info
+                #{alert_info_text(overall_statistics)}
+
+              %table.table.table-bordered.table-striped.sortable
+                %thead
+                  %tr
+                    %th Scenario Name
+                    %th Scenario File
+                    %th{"data-defaultsort" => "desc"} Time
+                %tbody
+                  - scenario_statistics.all.each do |file_name, scenario_result|
+                    %tr
+                      = std_file_td scenario_result[:scenario_name], scenario_result[:scenario_name]
+                      = std_file_td file_name, scenario_result[:scenario_file]
+                      = std_time_td scenario_result[:duration]
+            / /container
+
             #steps_tab.tab-pane.active
               / Main component for a primary marketing message or call to action
               .jumbotron
@@ -103,54 +148,6 @@
                       = time_td step_results, :average, highest_average
                       = time_td step_results, :total, highest_total
             / /container
-
-
-            #scenarios_tab.tab-pane
-              / Main component for a primary marketing message or call to action
-              .jumbotron
-                %h1 Cucumber scenario statistics
-                %p ... find those slow scenarios.
-
-              .alert.alert-info
-                #{alert_info_text(overall_statistics)}
-
-              %table.table.table-bordered.table-striped.sortable
-                %thead
-                  %tr
-                    %th Scenario Name
-                    %th Scenario File
-                    %th{"data-defaultsort" => "desc"} Time
-                %tbody
-                  - scenario_statistics.all.each do |file_name, scenario_result|
-                    %tr
-                      = std_file_td scenario_result[:scenario_name], scenario_result[:scenario_name]
-                      = std_file_td file_name, scenario_result[:scenario_file]
-                      = std_time_td scenario_result[:duration]
-            / /container
-
-
-            #features_tab.tab-pane
-              / Main component for a primary marketing message or call to action
-              .jumbotron
-                %h1 Cucumber feature statistics
-                %p ... find those slow features.
-
-              .alert.alert-info
-                #{alert_info_text(overall_statistics)}
-
-              %table.table.table-bordered.table-striped.sortable
-                %thead
-                  %tr
-                    %th Feature File
-                    %th{"data-defaultsort" => "desc"} Time
-                %tbody
-                  - feature_statistics.all.each do |file_name, feature_result|
-
-                    %tr
-                      = std_file_td file_name, feature_result[:feature_name]
-                      = std_time_td feature_result[:duration]
-    / /container
-
 
 
     /  Bootstrap core JavaScript
