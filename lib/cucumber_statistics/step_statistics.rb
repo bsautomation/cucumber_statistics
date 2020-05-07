@@ -5,7 +5,7 @@ module CucumberStatistics
     end
 
     def record step_name, duration, file_colon_line
-
+      puts "#{step_name} - #{duration}"
       # "/Users/kross/alienfast/acme/features/account management/admin_cancel_account.feature:8"
       step_results = @all[step_name]
       step_results ||= Hash.new

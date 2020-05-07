@@ -1,5 +1,8 @@
 module CucumberStatistics
   class Formatter
+
+    TEST_HOOK_NAMES_TO_IGNORE = ['Before hook', 'After hook']
+
     def initialize(step_mother, io, options)
       @step_mother = step_mother
       @io = io
@@ -10,12 +13,18 @@ module CucumberStatistics
       @scenario_statistics = ScenarioStatistics.new
       @feature_statistics = FeatureStatistics.new
       @unused_steps = UnusedSteps.new
+      @tracker = FeatureTracker.create
+      @deferred_before_test_steps = []
+      @deferred_after_test_steps = []
+      @scenario_tags = {}
     end
 
     #----------------------------------------------------
     # Step callbacks
     #----------------------------------------------------
-    def before_test_step(step)
+    def before_test_step(test_step)
+      next if TEST_HOOK_NAMES_TO_IGNORE.include?(test_step.to_s)
+
       @step_start_time = Time.now
     end
 
