@@ -1,3 +1,6 @@
+require 'allure-ruby-adaptor-api'
+require 'cucumber_statistics/feature_tracker'
+require 'cucumber_statistics/dsl'
 require 'cucumber_statistics/configuration'
 require 'cucumber_statistics/step_statistics'
 require 'cucumber_statistics/scenario_statistics'
