@@ -50,7 +50,7 @@ module CucumberStatistics
       else
         @scenario_name = test_case.name
       end
-      @scenario_duration = (result.duration.nanoseconds/1000000000.to_f).round(2)
+      @scenario_duration = (result.duration.nanoseconds/1000000000.to_f).round(2) rescue 0.0
       @scenario_file_colon_line = test_case.location.file + ':' + test_case.location.line.to_s
       @scenario_statistics.record @scenario_name, @scenario_duration, @scenario_file_colon_line
     end
