@@ -26,7 +26,7 @@ module CucumberStatistics
       step_name = test_step.to_s
       if !TEST_HOOK_NAMES_TO_IGNORE.include?(step_name)
         step_location = test_step.location.file + ':' + test_step.location.line.to_s
-        duration = (result.duration.nanoseconds/1000000000.to_f).round(2)
+        duration = (result.duration.nanoseconds/1000000000.to_f).round(2) rescue 0.0
         @step_statistics.record step_name, duration, step_location
       end
     end
@@ -63,13 +63,6 @@ module CucumberStatistics
       @scenario_file_colon_line = ''
       @scenario_start_time = Time.now
       @scenario_outline = feature_element.instance_of?(Cucumber::Core::Ast::ScenarioOutline)
-    end
-
-    def after_feature_element(feature_element)
-      # s_duration = 0
-      # @step_mother.steps.each { |s| s_duration = s_duration.to_f + (s.duration.nanoseconds.to_f/1000000000).round(2) }
-      # @scenario_duration = s_duration
-      # @scenario_statistics.record @scenario_name, @scenario_duration, @scenario_file_colon_line
     end
 
     #----------------------------------------------------
